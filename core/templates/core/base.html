@@ -1,6 +1,5 @@
 {% load static %}
 
-
 <!DOCTYPE html>
 <html lang="en-US" dir="ltr">
 
@@ -13,7 +12,7 @@
     <!-- ===============================================-->
     <!--    Document Title-->
     <!-- ===============================================-->
-    <title>Talleres adultos mayores</title>
+    <title>Taller Adulto Mayor</title>
 
 
     <!-- ===============================================-->
@@ -35,133 +34,42 @@
 
   </head>
 
-  <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3 d-block" data-navbar-on-scroll="data-navbar-on-scroll">
-    <div class="container"><a class="navbar-brand" href="index.html"><img src="{% static 'core/img/gallery/logo.png' %}" height="45" alt="logo" /></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"> </span></button>
-      <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
-        <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base">
-          <li class="nav-item px-2"><a class="nav-link" aria-current="page" href="index.html">Home</a></li>
-          <li class="nav-item px-2"><a class="nav-link" href="#services">Our Services</a></li>
-          <li class="nav-item px-2"><a class="nav-link" href="#findUs">Find Us</a></li>
-        </ul>
-        <div class="dropdown d-none d-lg-block">
-          <button class="btn bg-soft-warning ms-2" id="dropdownMenuButton1" type="submit" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-search text-warning"></i></button>
-          <div class="dropdown-menu dropdown-menu-lg-end p-0 rounded" aria-labelledby="dropdownMenuButton1" style="top:55px">
-            <form>
-              <input class="form-control border-200" type="search" placeholder="Search" aria-label="Search" style="background:#FDF1DF;" />
-            </form>
+
+  <body>
+
+    <!-- ===============================================-->
+    <!--    Main Content-->
+    <!-- ===============================================-->
+    <main class="main" id="top">
+      <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3 d-block" data-navbar-on-scroll="data-navbar-on-scroll">
+        <div class="container"><a class="navbar-brand" href="#home"><img src="{% static 'core/img/gallery/logo.png' %}" height="45" alt="logo" /></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"> </span></button>
+          <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base">
+              <li class="nav-item px-2"><a class="nav-link" aria-current="page" href="{% url 'index' %}">Inicio</a></li>
+
+            </ul>
+            {%  if user.is_authenticated %}
+            </div><a class="btn btn-primary order-1 order-lg-0 ms-lg-3" href="{% url 'logout' %}">Cerrar sesion</a>
+            <a class="order-lg-0 ms-lg-3" style="color: red;">Bienvenido {{ user.username }}</a>
+            {% else %}
+            </div><a class="btn btn-primary order-1 order-lg-0 ms-lg-3" href="{%  url 'login' %}">Inicia sesion</a>
+            <a class="btn btn-primary order-1 order-lg-0 ms-lg-3" href="{% url 'Autenticacion' %}">Registrate</a>
+            {% endif %}
           </div>
-        </div><a class="btn btn-primary order-1 order-lg-0 ms-lg-3" href="#!">Contact Us</a>
-        <form class="d-flex my-3 d-block d-lg-none">
-          <input class="form-control me-2 border-200 bg-light" type="search" placeholder="Search" aria-label="Search" />
-          <button class="btn btn-outline-primary" type="submit">Search</button>
-        </form>
-      </div>
-    </div>
-  </nav>
-
-  {% block contenido %}
-
-  {% endblock %}
-
-<!DOCTYPE html>
-<html lang="en-US" dir="ltr">
-
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-    <!-- ===============================================-->
-    <!--    Document Title-->
-    <!-- ===============================================-->
-    <title>courier | Landing, Responsive &amp; Business Templatee</title>
-
-
-    <!-- ===============================================-->
-    <!--    Favicons-->
-    <!-- ===============================================-->
-    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'core/img/favicons/apple-touch-icon.png' %} ">
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'core/img/favicons/favicon-32x32.png' %}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'core/img/favicons/favicon-16x16.png' %}">
-    <link rel="shortcut icon" type="image/x-icon" href="{% static 'core/img/favicons/favicon.ico' %}">
-    <link rel="manifest" href="{% static 'core/img/favicons/manifest.json' %}">
-    <meta name="msapplication-TileImage" content="{% static 'core/img/favicons/mstile-150x150.png ' %}">
-    <meta name="theme-color" content="#ffffff">
-
-
-    <!-- ===============================================-->
-    <!--    Stylesheets-->
-    <!-- ===============================================-->
-    <link href="{% static 'core/css/theme.css' %}" rel="stylesheet" />
-
-  </head>
-
-  <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3 d-block" data-navbar-on-scroll="data-navbar-on-scroll">
-    <div class="container"><a class="navbar-brand" href="index.html"><img src="{% static 'core/img/gallery/logo.png' %}" height="45" alt="logo" /></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"> </span></button>
-      <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
-        <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base">
-          <li class="nav-item px-2"><a class="nav-link" aria-current="page" href="index.html">Home</a></li>
-          <li class="nav-item px-2"><a class="nav-link" href="#services">Our Services</a></li>
-          <li class="nav-item px-2"><a class="nav-link" href="#findUs">Find Us</a></li>
-        </ul>
-        <div class="dropdown d-none d-lg-block">
-          <button class="btn bg-soft-warning ms-2" id="dropdownMenuButton1" type="submit" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-search text-warning"></i></button>
-          <div class="dropdown-menu dropdown-menu-lg-end p-0 rounded" aria-labelledby="dropdownMenuButton1" style="top:55px">
-            <form>
-              <input class="form-control border-200" type="search" placeholder="Search" aria-label="Search" style="background:#FDF1DF;" />
-            </form>
-          </div>
-        </div><a class="btn btn-primary order-1 order-lg-0 ms-lg-3" href="#!">Contact Us</a>
-        <form class="d-flex my-3 d-block d-lg-none">
-          <input class="form-control me-2 border-200 bg-light" type="search" placeholder="Search" aria-label="Search" />
-          <button class="btn btn-outline-primary" type="submit">Search</button>
-        </form>
-      </div>
-    </div>
-  </nav>
-
-  {% block contenido %}
-
-  {% endblock %}
-
-  <section class="bg-1000">
-
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6">
-          <h2 class="fw-bold text-white">Get an update every week</h2>
-          <p class="text-300">We ensure that your product is delivered in the safest possible<br />manner, at the correct location, at the right time.</p>
         </div>
-        <div class="col-lg-6">
-          <h5 class="text-primary mb-3">SUBSCRIBE TO NEWSLETTER </h5>
-          <form class="row gx-2 gy-2 align-items-center">
-            <div class="col">
-              <div class="input-group-icon">
-                <label class="visually-hidden" for="inputEmailCta">Address</label>
-                <input class="form-control input-box form-quriar-control text-light" id="inputEmailCta" type="email" placeholder="Enter your mail" />
-              </div>
-            </div>
-            <div class="d-grid gap-3 col-sm-auto">
-              <button class="btn btn-danger" type="submit">Subscribe</button>
-            </div>
-          </form>
+      </nav>
+      <section class="py-xxl-10 pb-0" id="home">
+        <div class="bg-holder bg-size" style="background-image:url(assets/img/gallery/hero-header-bg.png);background-position:top center;background-size:cover;">
         </div>
-      </div>
-    </div>
-    <!-- end of .container-->
 
-  </section>
-  <!-- <section> close ============================-->
-  <!-- ============================================-->
+  <div>
+    {% block contenido %}
 
+    {% endblock %}
+  </div>
 
 
-
-  <!-- ============================================-->
-  <!-- <section> begin ============================-->
   <section class="bg-900 pb-0 pt-5">
 
     <div class="container">
@@ -211,28 +119,23 @@
     <div class="container">
       <div class="row justify-content-md-between justify-content-evenly py-4">
         <div class="col-12 col-sm-8 col-md-6 col-lg-auto text-center text-md-start">
-          <p class="fs--1 my-2 fw-bold text-200">All rights Reserved &copy; Your Company, 2021</p>
+          <p class="fs--1 my-2 fw-bold text-200">All rights Reserved &copy; NPC.inc</p>
         </div>
         <div class="col-12 col-sm-8 col-md-6">
-          <p class="fs--1 my-2 text-center text-md-end text-200"> Made with&nbsp;
+          <p class="fs--1 my-2 text-center text-md-end text-200"> &nbsp;
             <svg class="bi bi-suit-heart-fill" xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#F95C19" viewBox="0 0 16 16">
-              <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"></path>
-            </svg>&nbsp;by&nbsp;<a class="fw-bold text-primary" href="https://themewagon.com/" target="_blank">ThemeWagon </a>
+            </svg>&nbsp;Made by&nbsp;<a class="fw-bold text-primary" href="https://themewagon.com/" target="_blank">Alex Pavez y Alan Moreno</a>
           </p>
         </div>
       </div>
     </div>
-    <!-- end of .container-->
 
   </section>
-  <!-- <section> close ============================-->
-  <!-- ============================================-->
+
 
 
 </main>
-<!-- ===============================================-->
-<!--    End of Main Content-->
-<!-- ===============================================-->
+
 
 
 
@@ -248,5 +151,4 @@
 <script src="{% static 'core/js/theme.js' %}"></script>
 
 <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
-{% endblock %}
 </body>
