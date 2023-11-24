@@ -12,7 +12,7 @@
             <div class="col-md-75 col-xl-6 col-xxl-5 text-md-start text-center py-8">
               <h1 class="fw-normal fs-6 fs-xxl-7">Talleres de confianza</h1>
               <h1 class="fw-bolder fs-6 fs-xxl-7 mb-2">dedicados a adultos mayores</h1>
-              <p class="fs-1 mb-5">Postula y podras usar nuestros servicios,<br />recuerda tener una cuenta para postular.</p><a class="btn btn-primary me-2" href="#!" role="button">Postula!<i class="fas fa-arrow-right ms-2"></i></a>
+              <p class="fs-1 mb-5">Postula y podras usar nuestros servicios,<br />recuerda tener una cuenta para postular.</p><a class="btn btn-primary me-2" href="#services" role="button">Postula!<i class="fas fa-arrow-right ms-2"></i></a>
             </div>
           </div>
         </div>
@@ -26,85 +26,44 @@
         <div class="container">
           <div class="row justify-content-center">
             <div class="col-md-8 col-lg-5 text-center mb-3">
-              <h5 class="text-danger">SERVICIOS</h5>
-              <h2>Nuestros servcios para ti</h2>
+              <h5 class="text-danger">Talleres</h5>
+              <h2>Nuestros Talleres para ti</h2>
             </div>
           </div>
           <div class="row h-100 justify-content-center">
+            {% for aux in Talleres %}
             <div class="col-md-4 pt-4 px-md-2 px-lg-3">
               <div class="card h-100 px-lg-5 card-span">
                 <div class="card-body d-flex flex-column justify-content-around">
                   <div class="text-center pt-5"><img class="img-fluid" src="{% static 'core/img/icons/services-1.svg' %}" alt="..." />
-                    <h5 class="my-4">Business Services</h5>
+                    <h5 class="my-4">{{ aux.nombre }}</h5>
                   </div>
-                  <p>Offering home delivery around the city, where your products will be at your doorstep within 48-72 hours.</p>
+                  <p>{{ aux.descripcion }} Duracion de {{ aux.horas }} horas.</p>
+                  
                   <ul class="list-unstyled">
-                    <li class="mb-2"><span class="me-2"><i class="fas fa-circle text-primary" style="font-size:.5rem"></i></span>Corporate goods
+                    <li class="mb-2"><span class="me-2"><i class="fas fa-circle text-primary" style="font-size:.5rem"></i></span>Sala: {{ aux.sala }}
                     </li>
-                    <li class="mb-2"><span class="me-2"><i class="fas fa-circle text-primary" style="font-size:.5rem"></i></span>Shipment
+                    <li class="mb-2"><span class="me-2"><i class="fas fa-circle text-primary" style="font-size:.5rem"></i></span>Minicipalidad de {{ aux.municipalidad }}
                     </li>
                     <li class="mb-2"><span class="me-2"><i class="fas fa-circle text-primary" style="font-size:.5rem"></i></span>Accesories
                     </li>
+                    
                   </ul>
+                  
                   <div class="text-center my-5">
                     <div class="d-grid">
-                      <button class="btn btn-outline-danger" type="submit">Learn more </button>
+                      <form method="post" action="{% url 'postular' %}">
+                        {% csrf_token %}
+                        <button class="btn btn-danger hover-top btn-glow border-0" type="submit">Postular</button>
+                    </form>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="col-md-4 pt-4 px-md-2 px-lg-3">
-              <div class="card h-100 px-lg-5 card-span">
-                <div class="card-body d-flex flex-column justify-content-around">
-                  <div class="text-center pt-5"><img class="img-fluid" src="assets/img/icons/services-2.svg" alt="..." />
-                    <h5 class="my-4">Statewide Services</h5>
-                  </div>
-                  <p>Offering home delivery around the city, where your products will be at your doorstep within 48-72 hours.</p>
-                  <ul class="list-unstyled">
-                    <li class="mb-2"><span class="me-2"><i class="fas fa-circle text-primary" style="font-size:.5rem"></i></span>Unlimited Bandwidth
-                    </li>
-                    <li class="mb-2"><span class="me-2"><i class="fas fa-circle text-primary" style="font-size:.5rem"></i></span>Encrypted Connection
-                    </li>
-                    <li class="mb-2"><span class="me-2"><i class="fas fa-circle text-primary" style="font-size:.5rem"></i></span>Yes Traffic Logs
-                    </li>
-                  </ul>
-                  <div class="text-center my-5">
-                    <div class="d-grid">
-                      <button class="btn btn-danger hover-top btn-glow border-0" type="submit">Learn more</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4 pt-4 px-md-2 px-lg-3">
-              <div class="card h-100 px-lg-5 card-span">
-                <div class="card-body d-flex flex-column justify-content-around">
-                  <div class="text-center pt-5"><img class="img-fluid" src="assets/img/icons/services-3.svg" alt="..." />
-                    <h5 class="my-4">Personal Services</h5>
-                  </div>
-                  <p>You can trust us to safely deliver your most sensitive documents to the specific area in a short time.</p>
-                  <ul class="list-unstyled">
-                    <li class="mb-2"><span class="me-2"><i class="fas fa-circle text-primary" style="font-size:.5rem"></i></span>Unlimited Bandwidth
-                    </li>
-                    <li class="mb-2"><span class="me-2"><i class="fas fa-circle text-primary" style="font-size:.5rem"></i></span>Encrypted Connection
-                    </li>
-                    <li class="mb-2"><span class="me-2"><i class="fas fa-circle text-primary" style="font-size:.5rem"></i></span>Yes Traffic Logs
-                    </li>
-                  </ul>
-                  <div class="text-center my-5">
-                    <div class="d-grid">
-                      <button class="btn btn-outline-danger" type="submit">Learn more </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+            
+          {% endfor %}
         </div>
-        <!-- end of .container-->
 
       </section>
-      <!-- <section> close ============================-->
-      <!-- ============================================-->
    {% endblock %}

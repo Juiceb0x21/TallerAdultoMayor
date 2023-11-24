@@ -36,10 +36,6 @@
 
 
   <body>
-
-    <!-- ===============================================-->
-    <!--    Main Content-->
-    <!-- ===============================================-->
     <main class="main" id="top">
       <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3 d-block" data-navbar-on-scroll="data-navbar-on-scroll">
         <div class="container"><a class="navbar-brand" href="#home"><img src="{% static 'core/img/gallery/logo.png' %}" height="45" alt="logo" /></a>
@@ -51,7 +47,7 @@
             </ul>
             {%  if user.is_authenticated %}
             </div><a class="btn btn-primary order-1 order-lg-0 ms-lg-3" href="{% url 'logout' %}">Cerrar sesion</a>
-            <a class="order-lg-0 ms-lg-3" style="color: red;">Bienvenido {{ user.username }}</a>
+            <a class="order-lg-0 ms-lg-3" style="color: red;">Bienvenido {{ user.first_name }}</a>
             {% else %}
             </div><a class="btn btn-primary order-1 order-lg-0 ms-lg-3" href="{%  url 'login' %}">Inicia sesion</a>
             <a class="btn btn-primary order-1 order-lg-0 ms-lg-3" href="{% url 'Autenticacion' %}">Registrate</a>
@@ -62,14 +58,11 @@
       <section class="py-xxl-10 pb-0" id="home">
         <div class="bg-holder bg-size" style="background-image:url(assets/img/gallery/hero-header-bg.png);background-position:top center;background-size:cover;">
         </div>
-
-  <div>
+ 
     {% block contenido %}
 
     {% endblock %}
-  </div>
-
-
+  
   <section class="bg-900 pb-0 pt-5">
 
     <div class="container">

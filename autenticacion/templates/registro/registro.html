@@ -5,23 +5,17 @@
 {% load crispy_forms_tags %}
 
 {% block contenido %}
-
-<form method="post" action="" style="color: black;">
-
+<form method="post" action="" style="color: black; margin-left: -5%;" class="my-0">
     {% csrf_token %}
-
     <div class="container">
         <div class="row">
             <div class="col-12 m-5">
-                <form method="POST">
-    
-    {{form|crispy}}
-    <br>
-    <button type="submit"  class="btn btn-primary order-1 order-lg-0 ms-lg-0" shape="round">Registrate</button>
- 
-
-</form>
-    </div>
-        </div>
+                <form method="POST" class="my-4">
+                    {{ form|crispy }}
+                    <br>
+                    <button type="submit" class="btn btn-primary">Registrate</button>
+                </form>
             </div>
-{% endblock %}        
+        </div>
+    </div>
+{% endblock %}

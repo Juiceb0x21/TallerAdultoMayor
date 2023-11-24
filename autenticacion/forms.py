@@ -4,23 +4,29 @@ from django import forms
 from django.core.exceptions import ValidationError
 
 class CustomUserCreationForm(forms.Form):
-    username = forms.CharField(label='Usuario', min_length=4, max_length=150)
-    email = forms.EmailField(label='Email')
-    password1 = forms.CharField(label='Contraseña', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Confirmar Contraseña', widget=forms.PasswordInput)
+    rut= forms.CharField(label='Rut', min_length=9, max_length=9, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    nombre = forms.CharField(label='Nombre', min_length=4, max_length=150, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    apellido1 = forms.CharField(label='Primer Apellido', min_length=4, max_length=150, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    apellido2 = forms.CharField(label='Segundo Apellido', min_length=4, max_length=150, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    email = forms.EmailField(label='Email', widget=forms.EmailInput(attrs={'class': 'form-control'}))
+    fecha_nac = forms.DateField(label='Fecha de Nacimiento', widget=forms.DateInput(attrs={'class': 'form-control'}))
+    telefono = forms.CharField(label='Telefono', min_length=9, max_length=9, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    direccion = forms.CharField(label='Direccion', min_length=4, max_length=150, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    password1 = forms.CharField(label='Contraseña', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    password2 = forms.CharField(label='Confirmar Contraseña', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 
-    def clean_username(self):
-        username = self.cleaned_data['username'].lower()
+    def clean_rut(self):
+        username = self.cleaned_data['rut'].lower()
         r = User.objects.filter(username=username)
         if r.count():
-            raise  ValidationError("Usuario ya existe")
+            raise  ValidationError("Rut ya existe")
         return username
 
     def clean_email(self):
         email = self.cleaned_data['email'].lower()
         r = User.objects.filter(email=email)
         if r.count():
-            raise  ValidationError("Email ya existe")
+            raise  ValidationError("Correo ya existe")
         return email
 
     def clean_password2(self):
@@ -34,8 +40,17 @@ class CustomUserCreationForm(forms.Form):
 
     def save(self, commit=True):
         user = User.objects.create_user(
-            self.cleaned_data['username'],
-            self.cleaned_data['email'],
-            self.cleaned_data['password1']
+            username=self.cleaned_data['rut'],
+            email=self.cleaned_data['email'],
+            password= self.cleaned_data['password1'],
+            first_name=self.cleaned_data['nombre'],
+            last_name=self.cleaned_data['apellido1']
         )
+        
+        user.apellido2 = self.cleaned_data['apellido2']
+        user.fecha_nac = self.cleaned_data['fecha_nac']
+        user.telefono = self.cleaned_data['telefono']
+        user.direccion = self.cleaned_data['direccion']
+
+
         return user
