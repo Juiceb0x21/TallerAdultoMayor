@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from .forms import CustomAuthenticationForm
 from django.contrib.auth.decorators import login_required, user_passes_test
-
+from .forms import *
 # Create your views here.
 
 def grupo_requerido(nombre_grupo):
@@ -40,6 +40,21 @@ def login_view(request):
     return render(request, 'login.html', {'form': form})
 
 @login_required
-def postular(request):
-    return render(request, 'core/postulacion.html')
+def postular(request, id):
+    talleresAll = Taller.objects.get(id=id)
+
+    data = {
+        'taller' : talleresAll,
+        'form' : InsForm(),
+    }
+
+    if request.method == 'POST':
+        formulario = InsForm(request.POST)
+        if formulario.is_valid():
+            Nombre = formulario.cleaned_data['Nombre']
+            Email = formulario.cleaned_data['Email']
+            Monto = formulario.cleaned_data['Monto']
+    
+
+    return render(request, 'core/postulacion.html', data)
 
