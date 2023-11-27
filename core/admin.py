@@ -5,6 +5,7 @@ from .models import Municipalidad
 from .models import Instructor
 from .models import Inscripcion
 
+
 # Register your models here.
 admin.site.register(Sala)
 
@@ -15,3 +16,4 @@ admin.site.register(Municipalidad)
 admin.site.register(Instructor)
 
 admin.site.register(Inscripcion)
+

@@ -17,8 +17,6 @@
 
                 <p class="fs-1 mb-3">{{ taller.inscripcion }}</p>
                 <h1 class="fw-bolder fs-3 fs-xxl-7 mb-2">Recordar que todos estos talleres solo estan vaibles para el año 2023</h1>
-                <br>
-                <a class="btn btn-primary me-2" href="#form" role="button">Formulario<i class="fas fa-arrow-right ms-2"></i></a>
 
             </div>
             <form method="post" action="" style="color: black; margin-top: -5%;" id="form">
@@ -34,9 +32,12 @@
                         </div>
                     </div>
                 </div> 
-                <a class="btn btn-primary me-2" href="#form" role="button">Inscribirse<i class="fas fa-arrow-right ms-2"></i></a>
                 <br>
         </div>
+        <div style="align-items: center;">
+            <a  class="btn btn-primary me-2" href="{% url 'inscribirse' user.id %}" role="button">Inscribirse<i class="fas fa-arrow-right ms-2"></i></a>
+        </div>
+        <br>
         
     </div>
 

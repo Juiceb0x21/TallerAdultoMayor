@@ -18,9 +18,9 @@ def register(request):
             
             login(request, usuario)
 
-            adultomayor = User.objects.get(username = usuario.username)
-            adultomayor.groups.add(1)
-            adultomayor.save()
+            usuario = User.objects.get(username = usuario.username)
+            usuario.groups.add(1)
+            usuario.save()
 
             return redirect('index')
 

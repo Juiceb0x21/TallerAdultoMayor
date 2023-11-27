@@ -10,12 +10,22 @@
         </div>
         <div class="container">
           <div class="row align-items-center">
+            {% if usuario == True %}
             <div class="col-md-5 col-xl-6 col-xxl-7 order-0 order-md-1 text-end"><img style="height: 130%; width: 130%;margin-left: -3%;" src="{% static 'core/img/illustrations/abuelos.png' %}" alt="hero-header"/></div>
             <div class="col-md-75 col-xl-6 col-xxl-5 text-md-start text-center py-8">
-              <h1 class="fw-normal fs-6 fs-xxl-7">Talleres de confianza</h1>
-              <h1 class="fw-bolder fs-6 fs-xxl-7 mb-2">dedicados a adultos mayores</h1>
-              <p class="fs-1 mb-5">Postula y podras usar nuestros servicios,<br />recuerda tener una cuenta para postular.</p><a class="btn btn-primary me-2" href="#services" role="button">Postula!<i class="fas fa-arrow-right ms-2"></i></a>
+              <h1 class="fw-normal fs-6 fs-xxl-7">Actualmente ya te encuentras en un taller</h1>
+              {% for taller in talleres_inscritos %}
+              <h1 class="fw-bolder fs-6 fs-xxl-7 mb-2">{{ taller.nombre }}</h1>
+              {% endfor %}
+              <p class="fs-1 mb-5">Reucuerda que puedes desvincularte del<br />taller siempre que quieras y estes a tiempo.</p><a class="btn btn-primary me-2" href="{% url 'salir' user.id %}" role="button">Desvinculate<i class="fas fa-arrow-right ms-2"></i></a>
+              {% else %}
+              <div class="col-md-5 col-xl-6 col-xxl-7 order-0 order-md-1 text-end"><img style="height: 130%; width: 130%;margin-left: -3%;" src="{% static 'core/img/illustrations/abuelos.png' %}" alt="hero-header"/></div>
+              <div class="col-md-75 col-xl-6 col-xxl-5 text-md-start text-center py-8">
+                <h1 class="fw-normal fs-6 fs-xxl-7">Talleres de confianza</h1>
+                <h1 class="fw-bolder fs-6 fs-xxl-7 mb-2">dedicados a adultos mayores</h1>
+                <p class="fs-1 mb-5">Postula y podras usar nuestros servicios,<br />recuerda tener una cuenta para postular.</p><a class="btn btn-primary me-2" href="#services" role="button">Postula!<i class="fas fa-arrow-right ms-2"></i></a>
             </div>
+
           </div>
         </div>
       </section>
@@ -29,6 +39,9 @@
               <h2>Nuestros Talleres para ti</h2>
             </div>
           </div>
+        
+   
+          
           <div class="row h-100 justify-content-center">
             {% for aux in Talleres %}
             <div class="col-md-4 pt-4 px-md-2 px-lg-3">
@@ -62,6 +75,8 @@
             </div>
           {% endfor %}
         </div>
-
+        {% endif %}
+        
+      
       </section>
    {% endblock %}

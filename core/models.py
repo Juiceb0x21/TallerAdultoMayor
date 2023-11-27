@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Sala(models.Model):
     numero = models.IntegerField()
@@ -28,6 +29,8 @@ class Instructor(models.Model):
     def __str__(self):
         return self.nombre_apellido
     
+
+    
 class Inscripcion(models.Model):
     fecha_inicio = models.CharField(max_length=50)
     fecha_termino = models.CharField(max_length=50)
@@ -49,6 +52,13 @@ class Taller(models.Model):
     
     def __str__(self):
         return self.nombre
+    
+class Perfil(models.Model):
+    usuario = models.OneToOneField(User, on_delete=models.CASCADE)
+    talleres_inscritos = models.ManyToManyField(Taller, related_name='usuarios_inscritos')
+
+    def __str__(self):
+        return f'Perfil de {self.usuario.username}'
     
 
 
