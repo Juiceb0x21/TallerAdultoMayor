@@ -8,5 +8,8 @@ urlpatterns = [
 
         path('inscribir/<id>/', inscribirse, name="inscribirse"),
 
-        path('salir/<id>/', salir, name="salir")
+        path('salir/<id>/', salir, name="salir"),
+
+       path('eliminar_cuenta/<int:id>/', delete_account, name='delete_account'),
+
     ]

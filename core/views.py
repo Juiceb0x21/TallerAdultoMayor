@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .models import *
 from django.contrib import messages
 from django.core.paginator import Paginator
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
 from .forms import CustomAuthenticationForm
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -10,6 +10,10 @@ from .forms import *
 from django.contrib.auth.models import User
 from django.http import Http404
 from .models import Taller, Inscripcion
+from django.http import JsonResponse
+from django.contrib.auth import logout
+
+from .forms import CustomAuthenticationForm
 # Create your views here.
  
 def grupo_requerido(nombre_grupo):
@@ -24,16 +28,10 @@ def index(request):
     user = request.user
     usuario_inscrito = user.groups.filter(name='Inscrito').exists()
 
-    if user.is_authenticated and usuario_inscrito:
-        perfil, creado = Perfil.objects.get_or_create(usuario=user)
-        talleres_inscritos = perfil.talleres_inscritos.all()
-    else:
-        talleres_inscritos = None
-
     TallerAll = Taller.objects.all()
 
     data = {
-        'talleres_inscritos': talleres_inscritos,
+        
         'Talleres': TallerAll,
         'usuario': usuario_inscrito,
     }
@@ -77,9 +75,6 @@ def postular(request, id):
                 numero=numero,
             )
 
-            taller.usuarios_inscritos.add(request.user)
-
-            taller.inscripcion = inscripcion
             taller.save()
 
             return redirect('index')
@@ -94,9 +89,37 @@ def inscribirse(request, id):
     usuario.save()
     return redirect('index')
 
+
+@login_required
 def salir(request, id):
     usuario = User.objects.get(id=id)
     usuario.groups.remove(2)
     usuario.groups.add(1)
     usuario.save()
     return redirect('index')
+
+@login_required
+def delete_account(request, id):
+    try:
+        user = User.objects.get(id=id)
+        username = user.username
+        user.delete()
+        print(f'Usuario {username} eliminado con éxito.')
+
+        logout(request)
+
+        messages.success(request, 'Cuenta eliminada correctamente.')
+        return JsonResponse({'message': 'Cuenta eliminada correctamente.', 'redirect': '/'})
+    except User.DoesNotExist:
+        print('Usuario no encontrado.')
+        raise Http404('Usuario no encontrado.')
+
+    return JsonResponse({'message': 'Error al eliminar la cuenta.'})
+
+
+
+
+
+     
+
+    

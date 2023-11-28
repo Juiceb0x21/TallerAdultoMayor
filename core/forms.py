@@ -11,4 +11,3 @@ class InsForm(forms.Form):
     correo= forms.CharField(label='Correo', min_length=0, max_length=100, widget=forms.TextInput(attrs={'class': 'form-control'}))
     numero= forms.CharField(label='Telefono', min_length=0, max_length=12, widget=forms.TextInput(attrs={'class': 'form-control'}))
 
-

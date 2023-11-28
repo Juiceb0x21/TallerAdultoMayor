@@ -37,6 +37,7 @@ class CustomUserCreationForm(forms.Form):
             raise ValidationError("Contraseñas no coinciden")
 
         return password2
+    
 
     def save(self, commit=True):
         user = User.objects.create_user(
@@ -54,3 +55,48 @@ class CustomUserCreationForm(forms.Form):
 
 
         return user
+    
+    
+
+class CustomUserUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = []
+
+    rut = forms.CharField(label='Rut', min_length=9, max_length=9, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    fecha_nac = forms.DateField(label='Fecha de Nacimiento', widget=forms.DateInput(attrs={'class': 'form-control'}))
+    telefono = forms.CharField(label='Telefono', min_length=9, max_length=9, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    direccion = forms.CharField(label='Direccion', min_length=4, max_length=150, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    email = forms.EmailField(label='Email', widget=forms.EmailInput(attrs={'class': 'form-control'}))
+
+    def __init__(self, *args, **kwargs):
+        super(CustomUserUpdateForm, self).__init__(*args, **kwargs)
+
+    def clean_rut(self):
+        username = self.cleaned_data['rut'].lower()
+        r = User.objects.filter(username=username).exclude(pk=self.instance.pk)
+        if r.count():
+            raise ValidationError("No puedes cambiar un rut ya registrado")
+        return username
+    
+    def clean_email(self):
+        email = self.cleaned_data['email'].lower()
+        r = User.objects.filter(email=email)
+        if r.count():
+            raise  ValidationError("No puedes cambiar un email ya registrado")
+        return email
+
+    def save(self, commit=True):
+        user = super(CustomUserUpdateForm, self).save(commit=False)
+        user.username = self.cleaned_data['rut']
+        user.fecha_nac = self.cleaned_data['fecha_nac']
+        user.telefono = self.cleaned_data['telefono']
+        user.direccion = self.cleaned_data['direccion']
+        user.email = self.cleaned_data['email']
+
+        if commit:
+            user.save()
+
+        return user
+    
+    

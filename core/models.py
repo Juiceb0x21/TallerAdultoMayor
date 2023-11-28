@@ -53,12 +53,6 @@ class Taller(models.Model):
     def __str__(self):
         return self.nombre
     
-class Perfil(models.Model):
-    usuario = models.OneToOneField(User, on_delete=models.CASCADE)
-    talleres_inscritos = models.ManyToManyField(Taller, related_name='usuarios_inscritos')
-
-    def __str__(self):
-        return f'Perfil de {self.usuario.username}'
     
 
 
